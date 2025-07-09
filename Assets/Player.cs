@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    private Rigidbody2D rb;
-    private Animator anim;
-
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
 
@@ -22,26 +19,17 @@ public class Player : MonoBehaviour
     private int comboCounter;
 
     private float xInput;
-    private int facingDir = 1;
-    private bool isFacingRight = true;
 
-    [Header("Collision info")]
-    [SerializeField] private float groundCheckDistance;
-    [SerializeField] private LayerMask whatIsGround;
-    private bool isGrounded;
-
-
-    void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
+        base.Start();
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         Movenment();
         CheckInput();
-        CollisionChecks();
 
         dashTime -= Time.deltaTime;
         dashCoolDownTimer -= Time.deltaTime;
@@ -62,13 +50,6 @@ public class Player : MonoBehaviour
         anim.SetBool("isDashing", dashTime > 0);
         anim.SetBool("isAttacking", isAttacking);
         anim.SetInteger("comboCounter", comboCounter);
-    }
-
-    //碰撞检测器
-    private void CollisionChecks()
-    {
-        //根据接地射线改变角色接地状态
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
     }
 
     //输入检测器
@@ -124,7 +105,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //跳跃动作
+    //冲刺动作
     private void DashAbility()
     {
         //如果跳跃动作不在冷却状态且角色不在攻击状态中可以进行冲刺
@@ -177,18 +158,5 @@ public class Player : MonoBehaviour
         {
             Flip();
         }
-    }
-    //翻转函数
-    private void Flip()
-    {
-        facingDir = facingDir * -1;
-        isFacingRight = !isFacingRight;
-        transform.Rotate(0, 180, 0);
-    }
-
-    //射线接地检测
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundCheckDistance));
     }
 }
