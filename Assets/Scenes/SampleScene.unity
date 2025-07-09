@@ -252,6 +252,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &105924785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 105924786}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &105924786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105924785}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 119036023}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &119036020
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +343,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 561366790}
+  - {fileID: 105924786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &119036025
@@ -326,15 +358,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf485dae6eccdf4cbd929e6bfcf7869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundCheck: {fileID: 105924786}
+  groundCheckDistance: 1.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
   moveSpeed: 7
   jumpForce: 12
   dashSpeed: 18
   dashDuratiuon: 0.25
   dashCoolDown: 0.5
-  groundCheckDistance: 1.5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
+  comboTime: 0.7
+  comboTimeWindow: 0
 --- !u!70 &119036026
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -603,6 +638,7 @@ GameObject:
   - component: {fileID: 561366790}
   - component: {fileID: 561366791}
   - component: {fileID: 561366792}
+  - component: {fileID: 561366793}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -698,6 +734,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &561366793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561366789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cfbe63b2ad49047981c932821c7e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &635313280
 GameObject:
   m_ObjectHideFlags: 0
